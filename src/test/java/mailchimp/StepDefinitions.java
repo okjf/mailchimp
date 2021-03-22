@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class StepDefinitons {
+public class StepDefinitions {
 
     WebDriver driver;
 
@@ -47,7 +47,7 @@ public class StepDefinitons {
         Thread.sleep(5000);
     }
 
-    @When("I click {string}")
+    @When("I click \"Sign up\"")
     public void i_click(String string) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
