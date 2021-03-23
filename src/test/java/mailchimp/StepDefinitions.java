@@ -1,6 +1,7 @@
 package mailchimp;
 
 import io.cucumber.java.After;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,6 +9,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StepDefinitions {
 
@@ -27,35 +32,43 @@ public class StepDefinitions {
 
     @Given("the user inputs a valid email")
     public void the_user_inputs_a_valid_email() {
-        String email = "test@test.com";
+        String email = Generator.generateEmail();
         WebElement emailField = driver.findElement(By.id("email"));
         emailField.sendKeys(email);
     }
 
     @Given("the user inputs a valid username")
     public void the_user_inputs_a_valid_username() {
-        String username = "test";
+        String username = Generator.generateUsername();
         WebElement usernameField = driver.findElement(By.id("new_username"));
         usernameField.sendKeys(username);
     }
 
     @Given("the user inputs a valid password")
-    public void the_user_inputs_a_valid_password() throws InterruptedException {
-        String password = "test";
+    public void the_user_inputs_a_valid_password() {
+        String password = Generator.generatePassword();
         WebElement passwordField = driver.findElement(By.id("new_password"));
         passwordField.sendKeys(password);
+    }
+
+    @When("the user signs up")
+    public void the_user_signs_up() throws InterruptedException {
+        WebElement signUpButton = driver.findElement(By.cssSelector("button[id=create-account]"));
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        //wait.until(ExpectedConditions.elementToBeClickable(signUpButton)).click();
         Thread.sleep(5000);
     }
 
-    @When("the user clicks \"Sign up\"")
-    public void the_user_clicks(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("the user sees the \"Check your email\" site")
+    public void the_user_user_sees_the_check_your_email_site() {
+        WebElement title = driver.findElement(By.cssSelector("h1"));
+        assertEquals("Check your email", title.getText());
     }
 
-    @Then("the user should see the \"Check your email\" site")
-    public void the_user_user_should_see_the_check_your_email_site() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @And("the user inputs a long username")
+    public void the_user_inputs_a_long_username() {
+        String username = Generator.generateLongUsername();
+        WebElement usernameField = driver.findElement(By.id("new_username"));
+        usernameField.sendKeys(username);
     }
 }
