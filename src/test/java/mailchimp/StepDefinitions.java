@@ -18,43 +18,43 @@ public class StepDefinitions {
         driver.close();
     }
 
-    @Given("I am on the register page")
-    public void i_am_on_the_register_page() {
+    @Given("the user is on the register page")
+    public void the_user_is_on_the_register_page() {
         System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Selenium\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://login.mailchimp.com/signup/");
     }
 
-    @Given("I input a valid email")
-    public void i_input_a_valid_email() {
+    @Given("the user inputs a valid email")
+    public void the_user_inputs_a_valid_email() {
         String email = "test@test.com";
         WebElement emailField = driver.findElement(By.id("email"));
         emailField.sendKeys(email);
     }
 
-    @Given("I input a valid username")
-    public void i_input_a_valid_username() {
+    @Given("the user inputs a valid username")
+    public void the_user_inputs_a_valid_username() {
         String username = "test";
         WebElement usernameField = driver.findElement(By.id("new_username"));
         usernameField.sendKeys(username);
     }
 
-    @Given("I input a valid password")
-    public void i_input_a_valid_password() throws InterruptedException {
+    @Given("the user inputs a valid password")
+    public void the_user_inputs_a_valid_password() throws InterruptedException {
         String password = "test";
         WebElement passwordField = driver.findElement(By.id("new_password"));
         passwordField.sendKeys(password);
         Thread.sleep(5000);
     }
 
-    @When("I click \"Sign up\"")
-    public void i_click(String string) {
+    @When("the user clicks \"Sign up\"")
+    public void the_user_clicks(String string) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 
-    @Then("I am registered")
-    public void i_am_registered() {
+    @Then("the user should see the \"Check your email\" site")
+    public void the_user_user_should_see_the_check_your_email_site() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }

@@ -1,12 +1,12 @@
-Feature: Register user
+Feature: Register new user
 
-  Scenario: Register user
-    Given I am on the register page
-    And I input a valid email
-    And I input a valid username
-    And I input a valid password
-    When I click "Sign up"
-    Then I am registered
+  Scenario: Register new user
+    Given the user is on the register page
+    And the user inputs a valid email
+    And the user inputs a valid username
+    And the user inputs a valid password
+    When the user clicks "Sign up"
+    Then the user should see the "Check your email" site
 
   Scenario: Register user with long username (100 characters+)
 
