@@ -24,7 +24,6 @@ public class Generator {
         while(username.length() <= 101){
             username += unixTime;
         }
-        System.out.println(username);
         return username;
     }
 }
