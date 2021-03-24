@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,10 +53,10 @@ public class StepDefinitions {
     }
 
     @When("the user signs up")
-    public void the_user_signs_up(){
+    public void the_user_signs_up() throws InterruptedException {
         WebElement signUpButton = driver.findElement(By.cssSelector("button[id=create-account]"));
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        //wait.until(ExpectedConditions.elementToBeClickable(signUpButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(signUpButton)).click();
     }
 
     @Then("the user sees the \"Check your email\" site")
@@ -65,7 +66,7 @@ public class StepDefinitions {
     }
 
     @And("the user inputs a long username")
-    public void the_user_inputs_a_long_username() {
+    public void the_user_inputs_a_long_username() throws InterruptedException {
         String username = Generator.generateLongUsername();
         WebElement usernameField = driver.findElement(By.id("new_username"));
         usernameField.sendKeys(username);
@@ -78,9 +79,9 @@ public class StepDefinitions {
         usernameField.sendKeys(username);
     }
 
-    @Then("the user sees an error")
-    public void the_user_sees_an_error() {
+    @Then("the user sees the error message: {string}")
+    public void the_user_sees_the_error_message(String error) {
         WebElement errorText = driver.findElement(By.cssSelector("span[class=invalid-error]"));
-        assertEquals("Another user with this username already exists. Maybe it's your evil twin. Spooky.", errorText.getText());
+        assertEquals(error, errorText.getText());
     }
 }

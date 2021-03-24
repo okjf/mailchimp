@@ -1,5 +1,5 @@
 Feature: Register new user
-  We need some kind of description here as well.
+  Registering a new user on the register page.
 
   Scenario: Register new user
     Given the user is on the register page
@@ -15,7 +15,7 @@ Feature: Register new user
     And the user inputs a long username
     And the user inputs a valid password
     When the user signs up
-    Then the user sees the "Check your email" site
+    Then the user sees the error message: "Enter a value less than 100 characters long"
 
   Scenario: Register user with already taken username
     Given the user is on the register page
@@ -23,6 +23,11 @@ Feature: Register new user
     And the user inputs an already taken username
     And the user inputs a valid password
     When the user signs up
-    Then the user sees an error
+    Then the user sees the error message: "Another user with this username already exists. Maybe it's your evil twin. Spooky."
 
   Scenario: Register user without email
+    Given the user is on the register page
+    And the user inputs a valid username
+    And the user inputs a valid password
+    When the user signs up
+    Then the user sees the error message: "Please enter a value"
