@@ -84,4 +84,11 @@ public class StepDefinitions {
         WebElement errorText = driver.findElement(By.cssSelector("span[class=invalid-error]"));
         assertEquals(error, errorText.getText());
     }
+
+    @Given("the user inputs no email")
+    public void the_user_inputs_no_email() {
+        String username = "";
+        WebElement usernameField = driver.findElement(By.id("new_username"));
+        usernameField.sendKeys(username);
+    }
 }
