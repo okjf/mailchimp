@@ -6,6 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,6 +30,7 @@ public class StepDefinitions {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://login.mailchimp.com/signup/");
+        handleCookies();
     }
 
     @Given("the user inputs a valid email")
@@ -90,5 +92,16 @@ public class StepDefinitions {
         String username = "";
         WebElement usernameField = driver.findElement(By.id("new_username"));
         usernameField.sendKeys(username);
+    }
+
+    private void handleCookies() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[id=onetrust-reject-all-handler]")));
+        try {
+            driver.findElement(By.cssSelector("button[id=onetrust-reject-all-handler]")).click();
+        }
+        catch (NoSuchElementException e){
+            System.out.println("Cookies already dealt with.");
+        }
     }
 }
